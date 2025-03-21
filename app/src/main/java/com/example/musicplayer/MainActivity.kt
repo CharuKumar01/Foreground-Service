@@ -12,6 +12,11 @@ import android.Manifest
 import androidx.core.app.ActivityCompat
 
 class MainActivity : AppCompatActivity() {
+    private val PERMISSIONS = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+    private val REQUEST_CODE = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,16 +26,19 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        requestNotificationPermission()
+//        requestNotificationPermission()
     }
 
-    private fun requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
-            }
-        }
-    }
+//    private fun requestNotificationPermission() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+//                != PackageManager.PERMISSION_GRANTED){
+//                ActivityCompat.requestPermissions(this,
+//                    arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
+//            }
+//        }
+//    }
+
+
+
 }
