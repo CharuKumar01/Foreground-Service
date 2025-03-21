@@ -26,19 +26,24 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//        requestNotificationPermission()
+        requestNotificationPermission()
+//        checkPermissions()
     }
 
-//    private fun requestNotificationPermission() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-//                != PackageManager.PERMISSION_GRANTED){
-//                ActivityCompat.requestPermissions(this,
-//                    arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
-//            }
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
+            }
+        }
+    }
+
+//    private fun checkPermissions(){
+//        if (PERMISSIONS.any{ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED}){
+//            ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_CODE)
 //        }
 //    }
-
-
 
 }
