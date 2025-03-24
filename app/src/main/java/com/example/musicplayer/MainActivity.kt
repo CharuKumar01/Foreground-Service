@@ -18,11 +18,6 @@ import androidx.databinding.DataBindingUtil
 import com.example.musicplayer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-//    private val PERMISSIONS = arrayOf(
-//        Manifest.permission.CAMERA,
-//        Manifest.permission.READ_EXTERNAL_STORAGE
-//    )
-//    private val REQUEST_CODE = 101
 
     private lateinit var bind: ActivityMainBinding
     @SuppressLint("ObsoleteSdkInt")
@@ -36,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         requestNotificationPermission()
-//        checkPermissions()
         val serviceIntent = Intent(this, MusicService::class.java)
 
         val play = bind.btnPlay
@@ -70,11 +64,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-//    private fun checkPermissions(){
-//        if (PERMISSIONS.any{ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED}){
-//            ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_CODE)
-//        }
-//    }
 
 }
