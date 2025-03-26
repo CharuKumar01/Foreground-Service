@@ -52,7 +52,7 @@ class MusicService : Service() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
     }
-    @SuppressLint("ObsoleteSdkInt")
+
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -61,7 +61,7 @@ class MusicService : Service() {
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)
-            manager.createNotificationChannel(channel) // 🔥 FIX: Register the channel
+            manager.createNotificationChannel(channel)
         }
     }
 }
