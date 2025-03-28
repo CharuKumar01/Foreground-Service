@@ -1,7 +1,6 @@
 package com.example.musicplayer
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -40,7 +39,10 @@ class MainActivity : AppCompatActivity() {
             play.visibility = View.GONE
             pause.visibility = View.VISIBLE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(serviceIntent) // 🚀 FIX: Ensures service starts on Android 8+
+                val serviceStartIntent = Intent(this, MusicService::class.java).apply {
+                    action = "START"
+                }
+                startForegroundService(serviceStartIntent) // 🚀 FIX: Ensures service starts on Android 8+
             } else {
                 startService(serviceIntent)
             }
