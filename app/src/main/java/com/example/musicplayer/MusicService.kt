@@ -17,7 +17,7 @@ class MusicService : Service() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
-//        Log.d("charu", "Service Created")
+        Log.d("charu", "Service Created")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -26,16 +26,15 @@ class MusicService : Service() {
             return START_STICKY
         }
 
-        createNotificationChannel()
         val notification = createNotification()
         startForeground(1, notification)
-//        Log.d("charu", "Service Started")
+        Log.d("charu", "Service Started")
         return START_STICKY
     }
 
     override fun onDestroy() {
         super.onDestroy()
-//        Log.d("charu", "Service Stopped")
+        Log.d("charu", "Service Stopped")
     }
 
     private fun createNotification(): Notification {

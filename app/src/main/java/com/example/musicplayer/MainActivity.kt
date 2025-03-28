@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("charu", "Pause button clicked")
             pause.visibility = View.GONE
             play.visibility = View.VISIBLE
-            stopService(Intent(this, MusicService::class.java))
+            stopService(serviceIntent)
         }
 
     }
