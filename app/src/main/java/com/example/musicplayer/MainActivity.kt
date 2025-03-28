@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         requestNotificationPermission()
-        val serviceIntent = Intent(this, MusicService::class.java)
 
         val play = bind.btnPlay
         val pause = bind.btnPause
@@ -39,19 +38,22 @@ class MainActivity : AppCompatActivity() {
             play.visibility = View.GONE
             pause.visibility = View.VISIBLE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val serviceStartIntent = Intent(this, MusicService::class.java).apply {
+                val startIntent = Intent(this, MusicService::class.java).apply {
                     action = "START"
                 }
-                startForegroundService(serviceStartIntent) // 🚀 FIX: Ensures service starts on Android 8+
+                startForegroundService(startIntent) // 🚀 FIX: Ensures service starts on Android 8+
             } else {
-                startService(serviceIntent)
+                startService(Intent(this, MusicService::class.java))
             }
         }
         pause.setOnClickListener {
             Log.d("charu", "Pause button clicked")
             pause.visibility = View.GONE
             play.visibility = View.VISIBLE
-            stopService(serviceIntent)
+            val pauseIntent = Intent(this, MusicService::class.java).apply {
+                action = "PAUSE"
+            }
+            startForegroundService(pauseIntent)
         }
 
     }

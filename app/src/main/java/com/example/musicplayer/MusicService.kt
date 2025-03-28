@@ -31,12 +31,10 @@ class MusicService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.action == "STOP") {
-            stopSelf()
-            return START_STICKY
-        }
-        if (intent?.action == "START") {
-            startMusic()
+        when(intent?.action){
+            "START" -> startMusic()
+            "PAUSE" -> pauseMusic()
+            "STOP" -> stopMusic()
         }
 
         val notification = createNotification()
@@ -47,6 +45,7 @@ class MusicService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        stopMusic()
         Log.d("charu", "Service Stopped")
     }
 
@@ -59,9 +58,18 @@ class MusicService : Service() {
         Log.d("charu", "Music Started")
     }
 
-    private fun pauseMusic(){}
+    private fun pauseMusic(){
+        mediaPlayer?.pause()
+        Log.d("charu", "Music Paused")
+    }
 
-    private fun stopMusic(){}
+    private fun stopMusic(){
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+        stopSelf()
+        Log.d("charu", "Music Stopped")
+    }
 
     private fun createNotification(): Notification {
 
