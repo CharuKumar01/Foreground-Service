@@ -32,6 +32,16 @@ class MainActivity : AppCompatActivity() {
 
         val play = bind.btnPlay
         val pause = bind.btnPause
+        val stopBtn = bind.stopBtn
+
+        stopBtn.setOnClickListener {
+            pause.visibility = View.GONE
+            play.visibility = View.VISIBLE
+            val stopIntent = Intent(this, MusicService::class.java).apply {
+                action = "STOP"
+            }
+            stopService(stopIntent)
+        }
 
         play.setOnClickListener {
             Log.d("charu", "Play button clicked")

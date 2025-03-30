@@ -64,11 +64,21 @@ class MusicService : Service() {
     }
 
     private fun stopMusic() {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        mediaPlayer?.let {
+            if (it.isPlaying){
+                it.stop()
+            }
+            it.release()
+            mediaPlayer = null
+        }
+
+        //Google deprecated the stopForeground(true) for android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){ //check for android 13+
+            stopForeground(STOP_FOREGROUND_REMOVE) //for newer versions
+        }else{
+            stopForeground(true) //for older versions
+        }
         stopSelf()
-        Log.d("charu", "Music Stopped")
     }
 
     private fun createNotification(): Notification {
