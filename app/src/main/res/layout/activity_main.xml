@@ -9,13 +9,24 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
         <ImageView
             android:id="@+id/btnPlay"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_play"
             android:clickable="true"
             android:focusable="true"
+            android:src="@drawable/ic_play"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -28,10 +39,10 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/ic_pause"
-            android:visibility="gone"
             android:clickable="true"
             android:focusable="true"
+            android:src="@drawable/ic_pause"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

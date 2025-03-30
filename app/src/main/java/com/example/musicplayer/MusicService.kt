@@ -31,7 +31,7 @@ class MusicService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when(intent?.action){
+        when (intent?.action) {
             "START" -> startMusic()
             "PAUSE" -> pauseMusic()
             "STOP" -> stopMusic()
@@ -49,8 +49,8 @@ class MusicService : Service() {
         Log.d("charu", "Service Stopped")
     }
 
-    private fun startMusic(){
-        if (mediaPlayer == null){
+    private fun startMusic() {
+        if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(this, R.raw.char_kadam)
             mediaPlayer?.isLooping = true
         }
@@ -58,12 +58,12 @@ class MusicService : Service() {
         Log.d("charu", "Music Started")
     }
 
-    private fun pauseMusic(){
+    private fun pauseMusic() {
         mediaPlayer?.pause()
         Log.d("charu", "Music Paused")
     }
 
-    private fun stopMusic(){
+    private fun stopMusic() {
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
@@ -72,16 +72,31 @@ class MusicService : Service() {
     }
 
     private fun createNotification(): Notification {
+        val startIntent = Intent(this, MusicService::class.java).apply { action = "START" }
+        val startPendingIntent = PendingIntent.getService(
+            this, 1, startIntent, PendingIntent.FLAG_UPDATE_CURRENT or
+                    PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val pauseIntent = Intent(this, MusicService::class.java).apply { action = "PAUSE" }
+        val pausePendingIntent = PendingIntent.getService(
+            this, 2, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT or
+                    PendingIntent.FLAG_IMMUTABLE
+        )
 
         val stopIntent = Intent(this, MusicService::class.java).apply { action = "STOP" }
-        val stopPendingIntent = PendingIntent.getService(this, 0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT or
-                PendingIntent.FLAG_IMMUTABLE)
+        val stopPendingIntent = PendingIntent.getService(
+            this, 0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT or
+                    PendingIntent.FLAG_IMMUTABLE
+        )
 
         return NotificationCompat.Builder(this, "music_channel")
             .setContentTitle("Music Player")
             .setContentText("Playing Music...")
             .setSmallIcon(R.drawable.ic_music)
-            .addAction(R.drawable.ic_pause, "STOP", stopPendingIntent)
+            .addAction(R.drawable.ic_play, "Play", startPendingIntent)
+            .addAction(R.drawable.ic_pause, "Pause",pausePendingIntent)
+            .addAction(R.drawable.ic_pause, "Stop", stopPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
     }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Music Player</string>
+    <string name="stop">Stop Service</string>
 </resources>
