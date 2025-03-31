@@ -72,15 +72,14 @@ class MusicService : Service() {
             mediaPlayer = null
         }
 
-        //Google deprecated the stopForeground(true) for android 13+
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){ //check for android 13+
-//            stopForeground(STOP_FOREGROUND_REMOVE) //for newer versions
-//        }else{
-//            stopForeground(true) //for older versions
-//        }
+        wakeLock?.let {
+            if (it.isHeld){
+                it.release()
+            }
+            wakeLock = null
+        }
+
         stopSelf()
-        wakeLock?.release()
-        wakeLock = null
     }
 
     private fun createNotification(): Notification {
