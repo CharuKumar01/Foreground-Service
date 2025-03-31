@@ -73,11 +73,11 @@ class MusicService : Service() {
         }
 
         //Google deprecated the stopForeground(true) for android 13+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){ //check for android 13+
-            stopForeground(STOP_FOREGROUND_REMOVE) //for newer versions
-        }else{
-            stopForeground(true) //for older versions
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){ //check for android 13+
+//            stopForeground(STOP_FOREGROUND_REMOVE) //for newer versions
+//        }else{
+//            stopForeground(true) //for older versions
+//        }
         stopSelf()
     }
 
